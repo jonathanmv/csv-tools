@@ -7,8 +7,10 @@
     "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
     "serve": "http-server -o -s -c 1 -a localhost",
     "dev": "npm-run-all --parallel watchify serve",
-    "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js",
-    "deploy": "npm run build && npm run deploy-gh-pages",
+    "clear": "rm -rf dist/*",
+    "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/dist/build.js",
+    "setup": "npm run clear; mkdir dist/dist; cp index.html dist/",
+    "deploy": "npm run setup; npm run build && npm run deploy-gh-pages",
     "deploy-gh-pages": "node gh-pages-deploy.js"
   },
   "dependencies": {
